@@ -32,7 +32,7 @@ df = [dict(Task="Job A", Start='2009-01-01', Finish='2009-02-28'),
 
 """
 __author__ = "Rick Venema"
-__version__ = 0.1
+__version__ = 1.0
 
 
 import json
