@@ -48,19 +48,22 @@ def argparser_gantt():
     """
     parser = argparse.ArgumentParser()
     parser.add_argument("-f", dest="file",  help="The JSON file that contains the data for the Gantt plot")
+    parser.add_argument("-t", dest="title",default="Gantt Plot",
+                        help="The title of the gantt plot, defaults to Gantt Plot", nargs="?")
     args = parser.parse_args()
     return args
 
 
-def make_gantt(data_frame):
+def make_gantt(data_frame, title="Gantt Plot"):
     """
     This function makes the plot, it takes a data_frame as argument
 
+    :param title: The title that the gantt plot has to use.
     :param data_frame: A data_frame containing the data that has to be plotted in the Gantt Plot
     :return: It shows the Graph that is made with the given data_frame
     """
     fig = ff.create_gantt(data_frame, index_col="Resource", showgrid_x=True, showgrid_y=True, show_colorbar=True,
-                          bar_width=0.5, group_tasks=True)
+                          bar_width=0.5, group_tasks=True, title=title)
     # The next lines shows the plot, it opens your standard browser and shows the graph.
     # Using a ssh connection wont work, because a GUI is needed for this function to work
     fig.show()
@@ -72,4 +75,4 @@ if __name__ == '__main__':
     json_f = open(arguments.file)
     json_d = json.load(json_f)
     # Makes gantt using the json file given via the commandline
-    make_gantt(json_d)
+    make_gantt(json_d, title=arguments.title)
